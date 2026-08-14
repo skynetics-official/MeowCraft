@@ -1,0 +1,40 @@
+{
+  "name": "meowcraft-launcher",
+  "version": "3.5.0",
+  "description": "MeowCraft Launcher — Minecraft launcher with Ely.by OAuth PKCE, RU/EN interface, modpacks, Modrinth and updates",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win nsis",
+    "build:dir": "electron-builder --dir"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "fs-extra": "^11.3.1",
+    "minecraft-launcher-core": "^3.18.2",
+    "msmc": "^5.0.5"
+  },
+  "devDependencies": {
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skynetics-official/MeowCraft.git"
+  },
+  "build": {
+    "appId": "com.meowcraft.launcher",
+    "productName": "MeowCraft",
+    "asar": true,
+    "files": ["src/**/*", "assets/**/*", "package.json"],
+    "directories": {"output": "dist"},
+    "win": {"target": [{"target": "nsis", "arch": ["x64"]}]},
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "MeowCraft"
+    }
+  }
+}
