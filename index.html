@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0d14">
+<title>MeowCraft — Minecraft Launcher</title>
+<meta name="description" content="MeowCraft — лаунчер Minecraft для Windows: Modrinth, сборки, Ely.by, Microsoft и экспериментальные Beta-функции.">
+<style>
+:root{
+  --bg:#090c12;--side:#0d1119;--panel:#111722;--panel2:#151c29;--line:#283142;
+  --txt:#f8f9ff;--mut:#93a1bd;--accent:#8f7dff;--accent2:#6e7cff;--green:#5de0a0;--yellow:#ffd36f;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--txt)}
+a{color:inherit}.app{min-height:100vh;display:grid;grid-template-columns:220px 1fr}
+.side{position:sticky;top:0;height:100vh;background:var(--side);border-right:1px solid var(--line);padding:26px 16px;display:flex;flex-direction:column}
+.logo{font-size:26px;font-weight:950;letter-spacing:-1px;margin:4px 8px 26px}.logo span{color:var(--accent)}
+.nav{display:grid;gap:7px}.nav a{padding:12px 13px;border-radius:11px;color:#a8b4ce;text-decoration:none;font-weight:700;font-size:14px}
+.nav a.active,.nav a:hover{background:#1c1b30;color:#fff}.nav small{font-size:15px;margin-right:8px}
+.sidefoot{margin-top:auto;color:#8290ac;font-size:11px;line-height:1.65;padding:0 6px}
+.main{min-width:0}.wrap{max-width:1140px;margin:auto;padding:0 28px}
+.hero{padding:66px 0 54px}.kicker{color:#9a8dff;font-weight:900;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+h1{font-size:clamp(46px,6vw,76px);line-height:.98;letter-spacing:-3px;margin:17px 0 18px;max-width:800px}
+h1 span{background:linear-gradient(120deg,#fff,#a69aff 58%,#79dff6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:740px;color:var(--mut);font-size:18px;line-height:1.65}
+.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 17px;border-radius:11px;border:1px solid var(--line);background:#192130;color:#fff;text-decoration:none;font-weight:850}
+.btn.primary{background:linear-gradient(135deg,#9a88ff,#6f78ff);border:0;color:#080a0f}.btn.beta{background:#1d180c;border-color:#6b5c32;color:#ffe18b}
+.release-meta{display:flex;gap:17px;flex-wrap:wrap;color:#8390aa;font-size:13px;margin-top:15px}
+.hero-shot{margin-top:38px;background:linear-gradient(135deg,#8d7cff44,#6ee7f914);padding:8px;border-radius:19px}
+.hero-shot img{display:block;width:100%;border-radius:13px;border:1px solid var(--line)}
+section{padding:65px 0}.section-head{margin-bottom:24px}.section-head h2{font-size:37px;letter-spacing:-1.2px;margin:7px 0 10px}.section-head p{color:var(--mut);line-height:1.6;max-width:730px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(180deg,#121924,#0e131d);border:1px solid var(--line);border-radius:16px;padding:20px;min-height:170px}
+.card.beta{border-color:#594c29;background:linear-gradient(180deg,#17150f,#0e0d0a)}
+.tag{display:inline-block;font-size:10px;font-weight:900;padding:4px 7px;border-radius:999px;margin-bottom:10px}.tag.stable{background:#143224;color:#72e4ad}.tag.beta{background:#342c13;color:#ffe28b}
+.card h3{margin:8px 0 7px}.card p{margin:0;color:var(--mut);font-size:14px;line-height:1.55}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}.release{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:22px}.release.beta{border-color:#594c29}
+.release h3{font-size:25px;margin:6px 0}.release ul{color:var(--mut);padding-left:20px;line-height:1.75}
+.gallery{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.gallery .stack{display:grid;gap:14px}.gallery figure{margin:0}.gallery img{display:block;width:100%;border:1px solid var(--line);border-radius:15px}.gallery figcaption{font-size:12px;color:#7f8ba5;margin-top:7px}
+.note{margin-top:16px;padding:13px 15px;border-radius:12px;background:#121722;border:1px solid var(--line);color:#9ca9c1;font-size:13px;line-height:1.55}
+.faq{border-top:1px solid var(--line)}details{padding:17px 0;border-bottom:1px solid var(--line)}summary{cursor:pointer;font-weight:850}details p{color:var(--mut);line-height:1.6}
+footer{border-top:1px solid var(--line);padding:30px 0 48px;color:#7c899f;font-size:12px}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.nav{grid-template-columns:repeat(2,1fr)}.sidefoot{display:none}.grid{grid-template-columns:1fr}.compare,.gallery{grid-template-columns:1fr}.gallery .stack{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="logo">Meow<span>Craft</span></div>
+    <nav class="nav">
+      <a class="active" href="#home"><small>🎮</small>Главная</a>
+      <a href="#features"><small>🧩</small>Функции</a>
+      <a href="#screens"><small>🖼</small>Скриншоты</a>
+      <a href="#download"><small>⬇</small>Скачать</a>
+      <a href="https://github.com/skynetics-official/MeowCraft" target="_blank"><small>↗</small>GitHub</a>
+    </nav>
+    <div class="sidefoot">Vanilla · Fabric · Forge<br>Release · Snapshot · Alpha/Beta<br>Modrinth · Ely.by · Microsoft</div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+      <section class="hero" id="home">
+        <div class="kicker">MeowCraft Launcher</div>
+        <h1><span>Minecraft без лишней возни.</span></h1>
+        <p class="lead">Запуск Minecraft, аккаунты, Modrinth и сборки — в интерфейсе, который выглядит так же, как сам MeowCraft.</p>
+        <div class="actions">
+          <a id="stableTop" class="btn primary" href="https://github.com/skynetics-official/MeowCraft/releases/latest">↓ Скачать Stable</a>
+          <a id="betaTop" class="btn beta" href="https://github.com/skynetics-official/MeowCraft/releases">🧪 Скачать Beta</a>
+        </div>
+        <div class="release-meta"><span id="stableMeta">Stable: проверка GitHub…</span><span id="betaMeta">Beta: проверка GitHub…</span><span>Windows 10/11 x64</span></div>
+        <div class="hero-shot"><img src="assets/play.png" alt="MeowCraft 3.8 Beta — Play"></div>
+      </section>
+
+      <section id="features">
+        <div class="section-head"><div class="kicker">Функции</div><h2>Stable отдельно, Beta отдельно</h2><p>Экспериментальные функции не выдаются за стабильные. На сайте сразу видно, что уже готово, а что пока тестируется.</p></div>
+        <div class="grid">
+          <div class="card"><span class="tag stable">STABLE</span><h3>🎮 Minecraft</h3><p>Релизы, снапшоты, Vanilla, Fabric и Forge с выбором сборки.</p></div>
+          <div class="card"><span class="tag stable">STABLE</span><h3>🧩 Modrinth</h3><p>Поиск, категории и установка модов прямо из лаунчера.</p></div>
+          <div class="card"><span class="tag stable">STABLE</span><h3>👤 Аккаунты</h3><p>Ely.by, Microsoft и локальный профиль.</p></div>
+          <div class="card beta"><span class="tag beta">BETA</span><h3>🩺 Здоровье сборки</h3><p>Проверка отсутствующих модов, дубликатов mod ID и очевидных конфликтов.</p></div>
+          <div class="card beta"><span class="tag beta">BETA</span><h3>⬆ Обновления модов</h3><p>Проверка совместимых версий Modrinth. Обновлять один мод или все — решает пользователь.</p></div>
+          <div class="card beta"><span class="tag beta">BETA</span><h3>💾 Backup миров</h3><p>Создание, список и восстановление резервных копий миров.</p></div>
+          <div class="card beta"><span class="tag beta">BETA</span><h3>🎨 Темы</h3><p>Экспериментальные темы интерфейса, не затрагивающие Minecraft.</p></div>
+          <div class="card beta"><span class="tag beta">BETA</span><h3>📦 .meowpack</h3><p>Моды, config, defaultconfigs, ресурспаки и shaderpacks в одном файле сборки.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head"><div class="kicker">Каналы обновлений</div><h2>Latest или Pre-release</h2><p>Stable подходит большинству. Beta получает новые функции раньше, но может содержать ошибки.</p></div>
+        <div class="compare">
+          <div class="release"><span class="tag stable">● STABLE / LATEST</span><h3 id="stableVersion">MeowCraft Stable</h3><ul><li>Основной канал</li><li>Меньше экспериментальных функций</li><li>Рекомендуется большинству</li></ul><a id="stableBtn" class="btn primary" href="https://github.com/skynetics-official/MeowCraft/releases/latest">Скачать Stable</a></div>
+          <div class="release beta"><span class="tag beta">🧪 PRE-RELEASE / BETA</span><h3 id="betaVersion">MeowCraft Beta</h3><ul><li>Новые функции раньше</li><li>Возможны баги</li><li>Подходит для тестирования</li></ul><a id="betaBtn" class="btn beta" href="https://github.com/skynetics-official/MeowCraft/releases">Скачать Beta</a></div>
+        </div>
+      </section>
+
+      <section id="screens">
+        <div class="section-head"><div class="kicker">Скриншоты</div><h2>Текущий Beta-интерфейс — Purple</h2><p>Использованы новые скриншоты MeowCraft 3.8.0-beta.12 с темой Purple. Скрин с аккаунтами специально не показываю, чтобы не светить другие ники.</p></div>
+        <div class="gallery">
+          <figure><img src="assets/mods.png" alt="MeowCraft Mods"><figcaption>Каталог Modrinth — Purple.</figcaption></figure>
+          <div class="stack">
+            <figure><img src="assets/modpacks.png" alt="MeowCraft Modpacks"><figcaption>Сборки и .meowpack — Purple.</figcaption></figure>
+            <figure><img src="assets/settings.png" alt="MeowCraft Settings"><figcaption>Настройки и тема Purple.</figcaption></figure>
+          </div>
+        </div>
+        <div class="note">Аккаунтный скрин не используется, потому что на нём есть другие ники. На сайте оставлен только скрин, где профиль называется MeowCraft.</div>
+      </section>
+
+      <section id="download">
+        <div class="section-head"><div class="kicker">Скачать</div><h2>Всегда актуальная версия</h2><p>Сайт сам читает GitHub Releases: обычный Release = Stable, Pre-release = Beta.</p></div>
+        <div class="actions" style="justify-content:flex-start"><a id="stableBottom" class="btn primary" href="https://github.com/skynetics-official/MeowCraft/releases/latest">↓ Stable</a><a id="betaBottom" class="btn beta" href="https://github.com/skynetics-official/MeowCraft/releases">🧪 Beta</a></div>
+      </section>
+
+      <section>
+        <div class="section-head"><div class="kicker">FAQ</div><h2>Коротко</h2></div>
+        <div class="faq">
+          <details><summary>Что выбрать — Stable или Beta?</summary><p>Stable, если просто хочешь пользоваться лаунчером. Beta — если хочешь первым тестировать новые функции.</p></details>
+          <details><summary>Где лежат официальные загрузки?</summary><p>В GitHub Releases репозитория MeowCraft.</p></details>
+          <details><summary>Почему нет скрина страницы аккаунтов?</summary><p>Чтобы не показывать чужие или тестовые ники. На сайте оставлены только безопасные скриншоты.</p></details>
+        </div>
+      </section>
+
+      <footer>© 2026 MeowCraft · Не является официальным продуктом Mojang Studios или Microsoft.</footer>
+    </div>
+  </main>
+</div>
+
+<script>
+const repo='skynetics-official/MeowCraft';
+const api='https://api.github.com/repos/'+repo+'/releases';
+const $=id=>document.getElementById(id);
+const ver=r=>(r?.tag_name||r?.name||'').replace(/^v/i,'');
+const exe=r=>(r?.assets||[]).find(a=>/setup.*\.exe$/i.test(a.name||''))||(r?.assets||[]).find(a=>/\.exe$/i.test(a.name||''));
+async function loadReleases(){
+  try{
+    const rs=await fetch(api+'?per_page=30',{headers:{Accept:'application/vnd.github+json'}}).then(r=>r.json());
+    const pub=Array.isArray(rs)?rs.filter(r=>!r.draft):[];
+    const stable=pub.find(r=>!r.prerelease);
+    const beta=pub.find(r=>r.prerelease);
+    if(stable){
+      const a=exe(stable),url=a?.browser_download_url||stable.html_url;
+      $('stableVersion').textContent='MeowCraft '+ver(stable);
+      $('stableMeta').textContent='Stable: '+ver(stable);
+      ['stableTop','stableBtn','stableBottom'].forEach(id=>$(id).href=url);
+    } else {
+      $('stableMeta').textContent='Stable: не опубликован';
+      $('stableVersion').textContent='Stable не опубликован';
+    }
+    if(beta){
+      const a=exe(beta),url=a?.browser_download_url||beta.html_url;
+      $('betaVersion').textContent='MeowCraft '+ver(beta);
+      $('betaMeta').textContent='Beta: '+ver(beta);
+      ['betaTop','betaBtn','betaBottom'].forEach(id=>$(id).href=url);
+    } else {
+      $('betaMeta').textContent='Beta: не опубликована';
+      $('betaVersion').textContent='Beta не опубликована';
+    }
+  }catch(e){
+    $('stableMeta').textContent='Stable: GitHub Latest';
+    $('betaMeta').textContent='Beta: GitHub Pre-release';
+  }
+}
+loadReleases();
+</script>
+</body>
+</html>
